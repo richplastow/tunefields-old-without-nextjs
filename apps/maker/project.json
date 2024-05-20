@@ -1,0 +1,9 @@
+{
+  "name": "maker",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/maker/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project maker --web",
+  "targets": {}
+}

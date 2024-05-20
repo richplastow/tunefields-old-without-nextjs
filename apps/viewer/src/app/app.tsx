@@ -1,3 +1,4 @@
+import { UiFooter } from '@tunefields/shared-ui';
 import NxWelcome from './nx-welcome';
 
 export function App() {
@@ -8,6 +9,7 @@ export function App() {
       `}</style>
 
       <NxWelcome title="viewer" />
+      <UiFooter />
     </div>
   );
 }
