@@ -42,7 +42,7 @@ export function App() {
           path="/tunefields?/make?/page-2/"
           element={
             <div>
-              <Link to=".." relative="path">Click here to go back to root page.</Link>
+              <Link to="../" relative="path">Click here to go back to root page.</Link>
             </div>
           }
         />

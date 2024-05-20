@@ -1,4 +1,5 @@
 /// <reference types='vitest' />
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
@@ -30,6 +31,12 @@ export default defineConfig({
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        'page-2': resolve(__dirname, 'index.html'),
+      },
     },
   },
 
