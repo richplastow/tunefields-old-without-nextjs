@@ -686,4 +686,5 @@ static-server docs/
 ```
 
 Visiting http://localhost:9080/view/ does not work - /assets/index-SOME_ID.js is
-missing. 
+missing.
+

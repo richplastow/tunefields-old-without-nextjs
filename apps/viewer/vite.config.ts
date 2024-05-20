@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
-  base: '/tunefields/view/',
+  base: './',
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/viewer',
 
@@ -26,7 +26,7 @@ export default defineConfig({
   // },
 
   build: {
-    outDir: '../../docs/tunefields/view',
+    outDir: '../../docs/view',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
