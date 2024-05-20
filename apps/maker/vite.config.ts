@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
+  base: '/tunefields/make/',
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/maker',
 
@@ -25,7 +26,7 @@ export default defineConfig({
   // },
 
   build: {
-    outDir: '../../docs/make',
+    outDir: '../../docs/tunefields/make',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,

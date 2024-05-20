@@ -111,6 +111,9 @@ npx nx serve viewer
 
 Visit <http://localhost:4200/> which should show 'Welcome viewer 👋'.
 
+In your browser's 'Network' developer tab, you should see about a dozen requests,
+all successful. Later, the build will show just 3 requests.
+
 `[ctrl-c]` to stop the server.
 
 ## List Nx's 'inferred tasks'
@@ -673,3 +676,14 @@ Visit <http://localhost:4200/> which should show 'Welcome maker 👋'.
 You can change "👋" to "!" in docs/make/assets/index-SOME_ID.js and refresh, to
 reassure yourself that the browser is reading files from the docs/ folder.
 
+Assuming you have the NPM package `static-server` installed globally:
+
+```bash
+static-server docs/
+# * Static server successfully started.
+# * Serving files at: http://localhost:9080
+# * Press Ctrl+C to shutdown.
+```
+
+Visiting http://localhost:9080/view/ does not work - /assets/index-SOME_ID.js is
+missing. 
