@@ -463,6 +463,45 @@ Here's a quick fix:
     </div>
 ```
 
+## Modify the apps for GitHub pages
+
+Remove `<base href="/" />` from the index.html of both apps. For example,
+apps/maker/index.html should become:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Maker</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+```
+
+Add `base: './',` to the vite.config.ts of both apps. For example,
+apps/maker/vite.config.ts should become:
+
+```ts
+/// <reference types='vitest' />
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+
+export default defineConfig({
+  base: './',
+  root: __dirname,
+  cacheDir: '../../node_modules/.vite/apps/viewer',
+  // ...
+});
+```
+
 ## View the project graph
 
 ```bash
@@ -685,6 +724,7 @@ static-server docs/
 # * Press Ctrl+C to shutdown.
 ```
 
-Visiting http://localhost:9080/view/ does not work - /assets/index-SOME_ID.js is
-missing.
-
+Visiting <http://localhost:9080/view/> should work as long as the
+[Modify the apps for GitHub pages](#modify-the-apps-for-github-pages) stage
+has been completed. Note that <http://localhost:9080/view> (without a trailing
+slash) will not work.
