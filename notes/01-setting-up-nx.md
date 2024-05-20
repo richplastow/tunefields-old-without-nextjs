@@ -22,6 +22,12 @@ https://nx.dev/getting-started/tutorials/react-monorepo-tutorial)
 
 ## Create a new React monorepo
 
+The 'Application name' will be 'viewer', because `create-nx-workspace` generates
+a simple no-router app. Later, we will use `npx nx g @nx/react:app maker` to
+create the more complex main app, which that generator will add routing to.
+
+Also note that I had issues with Tailwind CSS, so used `styled-jsx` instead.
+
 ```bash
 npx create-nx-workspace@latest tunefields --preset=react-monorepo
 # Need to install the following packages:
@@ -30,7 +36,7 @@ npx create-nx-workspace@latest tunefields --preset=react-monorepo
 y
 #  NX   Let's create a new workspace [https://nx.dev/getting-started/intro]
 # ? Application name ›
-TuneFields
+viewer
 # ? Which bundler would you like to use? …
 # Vite    [ https://vitejs.dev/     ]
 # Webpack [ https://webpack.js.org/ ]
@@ -49,7 +55,7 @@ Cypress
 # styled-components [ https://styled-components.com            ]
 # emotion           [ https://emotion.sh                       ]
 # styled-jsx        [ https://www.npmjs.com/package/styled-jsx ]
-tailwind
+styled-jsx
 # ? Set up CI with caching, distribution and test deflaking …  
 # (it's free and can be disabled any time)
 # Yes, for GitHub Actions with Nx Cloud
@@ -75,7 +81,7 @@ Skip for now
 ```
 
 You should see a new 'tunefields' subdirectory, with a bunch of files. According
-to my Mac, 257,218,683 bytes (343 MB on disk) for 29,799 items.
+to my Mac, 250,955,744 bytes (333.5 MB on disk) for 28,995 items.
 
 ## Move the generated files to the top level
 
