@@ -15,8 +15,6 @@ LICENSE
 README.md
 ```
 
-...see below for how the app looked after this step.
-
 Based on the [nx.dev 'Building React Apps in an Nx Monorepo' tutorial:](
 https://nx.dev/getting-started/tutorials/react-monorepo-tutorial)
 
@@ -296,7 +294,7 @@ Visit <http://localhost:4200/> which should show 'Welcome maker 👋'.
 
 A library contains a collection of React components.
 
-The viewer app will be a cut-down version of the full TuneFields app, so many
+The viewer app will be a cut-down version of the full Tunefields app, so many
 components will be shared between them. These should live in a new libs/ folder.
 
 ```bash
@@ -658,7 +656,8 @@ npx nx run-many -t build
 You should see the new docs/make/ and docs/view/ folders. And docs/index.html
 has not been deleted or changed (it can become a menu or auto-redirect page).
 
-You can check one of the builds:
+You can check one of the builds using `npx nx serve-static`, although this is
+not an accurate simulation of how GitHub Pages will serve the apps:
 
 ```bash
 npx nx serve-static maker
@@ -725,6 +724,9 @@ static-server docs/
 ```
 
 Visiting <http://localhost:9080/view/> should work as long as the
-[Modify the apps for GitHub pages](#modify-the-apps-for-github-pages) stage
-has been completed. Note that <http://localhost:9080/view> (without a trailing
-slash) will not work.
+[Modify the apps for GitHub pages](#modify-the-apps-for-github-pages) change has
+been done. Note that <http://localhost:9080/view> (without a trailing slash)
+will not work.
+
+Next, we will add support for ['Not Found' and deep links.](
+./03-not-found-and-deep-links.md)
