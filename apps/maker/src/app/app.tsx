@@ -1,9 +1,27 @@
 import { UiFooter } from '@tunefields/shared-ui';
 import NxWelcome from './nx-welcome';
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 export function App() {
+
+  // For a URL with "redirect" in its query (likely from 404.html), redirect
+  // "/make/?redirect=page-2" to "/make/page-2".
+  // The hash and any other query string values should be preserved, so redirect
+  // "/make/?a=b&redirect=page-2#hash" to "/make/page-2?a=b#hash".
+  const { hash, search } = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const searchParams = new URLSearchParams(search);
+    let redirect = searchParams.get('redirect');
+    if (!redirect) return; // null or empty string, so no redirect is needed
+    searchParams.delete('redirect');
+    if (searchParams.size) redirect = `${redirect}?${searchParams}`;
+    redirect += hash; // either an empty string, or "#starts-with-hash"
+    navigate(redirect, { replace: true }); // remove current URL from history
+  }, []);
+
   return (
     <div>
       <style jsx>{`

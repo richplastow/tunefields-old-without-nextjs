@@ -10,6 +10,9 @@ several issues when served using GitHub Pages:
 3. The 'maker' app's generated 'page-2' and 'home' links show non-canonical URLs
    in the browser's address bar
 
+React Router provides a `<HashRouter>` which would solve some of these problems.
+But the way that `<BrowserRouter>` URLs look is nicer, I think.
+
 ## Add a '404 Not Found' page
 
 The docs/404.html file below shows 'Tunefields Not Found' for deep-link requests
@@ -86,4 +89,93 @@ If not on richplastow.com:
     }()</script>
 </body>
 </html>
+```
+
+## Fix the 'maker' app's generated 'Page 2' and 'Home' links
+
+Currently, although these do work, the links show non-canonical URLs in the
+browser's address bar. For example:
+
+```
+While at:
+    https://richplastow.com/tunefields/make/
+Click the 'Page 2' link, and the address bar will change to:
+    https://richplastow.com/page-2
+
+While at:
+    http://localhost:9080/make/
+Click the 'Page 2' link, and the address bar will change to:
+    http://localhost:9080/page-2
+```
+
+In both cases, Page 2 renders and works without any problems. But refreshing
+the page (or deep linking to this unservable URL) shows 'Tunefields Not Found'.
+
+The solution is to add a `basename` prop to the 'maker' app's `<BrowserRouter>`,
+in the apps/maker/src/main.tsx file:
+
+```tsx
+// ...
+root.render(
+  <StrictMode>
+    <BrowserRouter basename={
+      location.hostname === 'richplastow.com' ? '/tunefields/make/' : '/make/'
+    }>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+```
+
+> If `build` generates extra docs/make/assets/main-SOME_ID.js files which don't
+> seem to be used, delete the .nx/cache/ folder and try `build` again.
+
+```
+Now, while at:
+    https://richplastow.com/tunefields/make/
+Click the 'Page 2' link, and the address bar will change to:
+    https://richplastow.com/tunefields/make/page-2
+
+While at:
+    http://localhost:9080/make/
+Click the 'Page 2' link, and the address bar will change to:
+    http://localhost:9080/make/page-2
+```
+
+In both cases, Page 2 still renders and works without any problems. But now
+refreshing the page (or deep linking to this unservable URL) redirects to the
+correct /make/?redirect=page-2 URL.
+
+## Get the 'maker' app to deal with a "redirect" query-string
+
+Add some hooks to apps/maker/src/app/app.tsx which redirect to the correct deep
+link, if "redirect" is in the URL's query-string.
+
+```tsx
+// ...
+import { useEffect } from 'react';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+
+export function App() {
+
+  // For a URL with "redirect" in its query (likely from 404.html), redirect
+  // "/make/?redirect=page-2" to "/make/page-2".
+  // The hash and any other query string values should be preserved, so redirect
+  // "/make/?a=b&redirect=page-2#hash" to "/make/page-2?a=b#hash".
+  const { hash, search } = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const searchParams = new URLSearchParams(search);
+    let redirect = searchParams.get('redirect');
+    if (!redirect) return; // null or empty string, so no redirect is needed
+    searchParams.delete('redirect');
+    if (searchParams.size) redirect = `${redirect}?${searchParams}`;
+    redirect += hash; // either an empty string, or "#starts-with-hash"
+    navigate(redirect, { replace: true }); // remove current URL from history
+  }, []);
+
+  // ...
+}
+
+export default App;
 ```
