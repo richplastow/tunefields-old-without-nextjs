@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={
+      location.hostname === 'richplastow.com' ? '/tunefields/make/' : '/make/'
+    }>
       <App />
     </BrowserRouter>
   </StrictMode>

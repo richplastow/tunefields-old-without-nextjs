@@ -12,7 +12,25 @@ several issues when served using GitHub Pages:
 
 ## Add a '404 Not Found' page
 
-Add a docs/404.html file with basic forwarding:
+The docs/404.html file below shows 'Tunefields Not Found' for deep-link requests
+which do not point to a subdirectory of /make/ or /view/ (or /tunefields/make/
+or /tunefields/view/ on richplastow.com).
+
+However, all deep-link requests which __*do*__ point to such a subdirectory are
+redirected, with the subdirectory details moved into a URL query. For example:
+
+```
+If on richplastow.com:
+/tunefields/make/someID/123/edit -> /tunefields/make/?redirect=someID/123/edit
+
+If not on richplastow.com:
+/view/a/?b&c=d#e&f=g -> /tunefields/view/?b&c=d&redirect=a/#e&f=g
+```
+
+> Note that redirection is done using replace(), which means that the unservable
+> deep link is removed from the browser's history. So if the user clicks the
+> 'Back' button after the redirect, they will return to whatever URL they were
+> at __*before*__ they clicked the unservable deep link.
 
 ```html
 <!DOCTYPE html>
