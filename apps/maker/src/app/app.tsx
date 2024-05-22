@@ -20,7 +20,7 @@ export function App() {
     if (searchParams.size) redirect = `${redirect}?${searchParams}`;
     redirect += hash; // either an empty string, or "#starts-with-hash"
     navigate(redirect, { replace: true }); // remove current URL from history
-  }, []);
+  }, [hash, navigate, search]);
 
   return (
     <div>

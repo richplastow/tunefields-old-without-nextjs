@@ -657,7 +657,9 @@ You should see the new docs/make/ and docs/view/ folders. And docs/index.html
 has not been deleted or changed (it can become a menu or auto-redirect page).
 
 You can check one of the builds using `npx nx serve-static`, although this is
-not an accurate simulation of how GitHub Pages will serve the apps:
+not an accurate simulation of how GitHub Pages will serve the apps. Also, in the
+[next step](./03-not-found-and-deep-links.md), the 'maker' app will need to be
+served at '/make/', which will break `npx nx serve-static maker`.
 
 ```bash
 npx nx serve-static maker

@@ -29,9 +29,9 @@ anonymous users play and discover published Tunes.
 Serve the 'admin', 'maker' or 'viewer' apps locally, during development:
 
 ```bash
-npx nx serve admin
-npx nx serve maker
-npx nx serve viewer
+npx nx serve admin # TODO
+npx nx serve maker # http://localhost:4200/make/
+npx nx serve viewer # http://localhost:4200/
 ```
 
 Run linting, unit tests, and end-to-end tests:
@@ -39,7 +39,7 @@ Run linting, unit tests, and end-to-end tests:
 ```bash
 npx nx run-many -t lint
 npx nx run-many -t test
-npx nx e2e admin-e2e
+npx nx e2e admin-e2e # TODO
 npx nx e2e maker-e2e
 npx nx e2e viewer-e2e
 ```
@@ -47,6 +47,8 @@ npx nx e2e viewer-e2e
 Build the apps, and serve them using [`static-server`](
 https://www.npmjs.com/package/static-server). This provides a more accurate
 simulation of how GitHub Pages will serve the apps, than using Nx's standard
+(and [currently broken](
+./notes/03-not-found-and-deep-links.md#fix-the-nx-commands-we-just-broke))
 `npx nx serve-static maker` command.
 
 ```bash

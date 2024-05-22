@@ -119,7 +119,7 @@ in the apps/maker/src/main.tsx file:
 root.render(
   <StrictMode>
     <BrowserRouter basename={
-      location.hostname === 'richplastow.com' ? '/tunefields/make/' : '/make/'
+      window.location.hostname === 'richplastow.com' ? '/tunefields/make/' : '/make/'
     }>
       <App />
     </BrowserRouter>
@@ -172,10 +172,22 @@ export function App() {
     if (searchParams.size) redirect = `${redirect}?${searchParams}`;
     redirect += hash; // either an empty string, or "#starts-with-hash"
     navigate(redirect, { replace: true }); // remove current URL from history
-  }, []);
+  }, [hash, navigate, search]);
 
   // ...
 }
 
 export default App;
 ```
+
+## Fix the Nx commands we just broke
+
+In apps/maker-e2e/src/e2e/app.cy.ts, change `beforeEach(() => cy.visit('/'))`
+to `beforeEach(() => cy.visit('/make/'))`.
+
+Now that the 'maker' app is served at '/make/', `npx nx serve-static maker` is
+broken. But `npx nx run-many -t build && static-server -n docs/404.html docs/`
+is a better simulation of how GitHub Pages will host the apps, so fixing
+`npx nx serve-static maker` is not a priority.
+
+
