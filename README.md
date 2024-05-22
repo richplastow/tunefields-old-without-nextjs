@@ -9,11 +9,7 @@
 
 ## Tunefields architecture
 
-__Tunefields consists of an Express back-end app, and three React front-end apps:__
-
-__'server'__ is the Express back-end app. It's used for storing user accounts,
-sending emails for sign-up or password reset, storing created Tunes, and
-logging app usage.
+__Tunefields consists of three React front-end apps:__
 
 __'admin'__ lets system administrators monitor the server and app usage, and
 manage user accounts.
@@ -23,6 +19,11 @@ from a 3D world, assemble Prunables into 'Loops', and combine Loops into 'Tunes'
 
 __'viewer'__ is small app, essentially a cut-down version of 'maker', which lets
 anonymous users play and discover published Tunes.
+
+All three Tunefields apps make use of a [generic-user-server](
+https://github.com/richplastow/generic-user-server) instance running on AWS to
+handle auth, store user accounts, send emails for sign-up or password reset,
+store created Tunes, and store app usage statistics.
 
 ## Handy dev commands
 
