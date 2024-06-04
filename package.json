@@ -1,9 +1,9 @@
 {
-  "name": "@tunefields/source",
+  "name": "tunefields-old-without-nextjs",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {},
-  "private": true,
+  "private": false,
   "dependencies": {
     "react": "18.3.1",
     "react-dom": "18.3.1",

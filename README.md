@@ -1,11 +1,13 @@
-# Tunefields
+# Tunefields (OLD version, before using NextJS)
+
+__DEPRECATED: Tunefields development continues at <https://github.com/richplastow/tunefields>__
 
 > A 3D creative music game
 
-- 20240520
+- Created 20240520
 - Rich Plastow
-- <https://github.com/richplastow/tunefields>
-- <https://richplastow.com/tunefields/>
+- <https://github.com/richplastow/tunefields-old-without-nextjs>
+- <https://richplastow.com/tunefields-old-without-nextjs/>
 
 ## Tunefields architecture
 
